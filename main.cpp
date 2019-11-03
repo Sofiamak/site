@@ -20,7 +20,8 @@ int main(void) {
       router.Run(svr);
 
       svr.ErrorHandler();
-     // svr.SetLogger();
+      
+      svr.SetLogger();
       if(!svr.Listen("localhost", 8080)){
         return false;
       }

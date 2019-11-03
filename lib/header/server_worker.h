@@ -18,6 +18,7 @@ namespace server
 
         public:
             Server ser;
+            int a=5;
             string DumpHeaders(const Headers &headers); 
             bool Listen(const char *host, int port, int socket_flags);
             string  Logs(const Request &req, const Response &res);
@@ -71,7 +72,7 @@ namespace server
             s += this->DumpHeaders(res.headers);
             s += "\n";
 
-            if (!res.body.empty()) { s += res.body; }
+            //if (!res.body.empty()) { s += res.body; }
 
             s += "\n";
 
@@ -113,7 +114,7 @@ namespace server
         }
         fstream reader(file_name, ios::in | ios::binary);
         if (!reader) {
-            cout << "n Файл не существует или его невозможно открыть на чтение! - " << file_name;
+            cout << "n File doesn't exist or it's impossible to open it ! " << file_name;
             return -2;
         }
         reader.seekg(0, ios::end);
