@@ -22,8 +22,6 @@ namespace router
       Page  page;
       Posts  post;
    
-      
-
    public:
       void Run(ServerWorker &sw){
    

@@ -1,0 +1,8 @@
+CREATE TABLE  `content` (
+   `ID`   BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
+   `name` VARCHAR (255)  NOT NULL,
+   `descrption`  TEXT    NOT NULL,
+   `date_created` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+   `date_update`  TIMESTAMP NULL,
+    PRIMARY KEY (ID)
+)ENGINE = InnoDB;

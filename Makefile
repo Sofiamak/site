@@ -1,7 +1,8 @@
 all: restart
 
-IMAGE = market
+IMAGE=site
 TAG_BD=mysql
+TAG_WEB=web
 
 DEV_DATABASE_IMAGE = mysql/mysql-server:5.7
 DEV_DATABASE_PASS=pass
@@ -9,8 +10,8 @@ DEV_DATABASE_NAME=market
 DEV_DATABASE_USER=user
 
 create: main.cpp
-	g++ -c main.cpp -o bin/main.o
-	g++ -o main bin/main.o -I.. -lpthread 
+	g++ -c main.cpp  -o bin/main.o
+	g++ -o main  bin/main.o  -I.. -lpthread  `mysql_config --libs`
 
 clean:
 	rm -rf bin/*.o create
@@ -22,14 +23,18 @@ run: create
 
 restart: clean  run
 
-client_t:
-	g++ -c client.cpp -o bin/client.o
-	g++ -o client bin/client.o
+#################################################
+####################MYSQL###############################
+###################################################3
 
-client_run: client_t
-	./client
+image:
+	docker build -t $(IMAGE) .
 
-#docker rmi $(docker images -a -q)
+
+
+mysql_stop: 
+	docker stop mysql_client || echo
+
 mysql_client_build:
 	docker build -t $(DEV_DATABASE_IMAGE) .
 
@@ -59,8 +64,14 @@ mysql_client: mysql_client_build
 mysql_client_stop:
 	docker stop mysql_client || echo
 
-#mysql -uroot -p
-#show databases;
-#show tables;
 mysql_exec:
 	docker exec -it mysql_client bash
+
+
+##############################################################
+$(TAG_WEB)_container: image
+	docker stop $@ || echo
+	docker run --rm  --name $@  -p 9000:80  -d  $(IMAGE)
+	@sleep 15
+	docker exec -it $@ bash ./start.sh
+	
