@@ -1,4 +1,4 @@
-FROM ubuntu:18.04 as builder
+FROM ubuntu:18.04 AS builder
 
 # Install.
 RUN apt-get update
@@ -30,10 +30,12 @@ RUN find /usr/ -name 'mysql.h'
 
 RUN make create
 
-WORKDIR /
+WORKDIR /prod
 
-# # install nginx
-RUN apt-get update -y
+RUN  mv  /build/main  /prod/main
+RUN  mv  /build/web  /prod/web
+RUN  mv  /build/start.sh  /prod/start.sh
+RUN  rm -rf build
 
 RUN  rm -f etc/nginx/nginx.conf
 # # add nginx conf
@@ -51,14 +53,6 @@ EXPOSE 80 443
 WORKDIR /etc/nginx
 
 CMD ["nginx"]
-
-WORKDIR /
-
-RUN mkdir prod
-COPY --from=builder   /build/main   /prod/main
-COPY --from=builder   /build/web    /prod/web
-
-RUN  rm -rf build
 
 WORKDIR /prod
 
