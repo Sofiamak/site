@@ -11,6 +11,7 @@ cd cmake-3.5.0-rc3/
 ./configure --prefix=/usr
 make -j<cpu_count>
 sudo make install -->
+sudo aa-remove-unknown
 
 sudo apt-get purge --auto-remove apparmor
 sudo service docker restart

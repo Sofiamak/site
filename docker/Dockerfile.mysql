@@ -1,0 +1,16 @@
+
+FROM mysql
+# Add a database
+ENV MYSQL_DATABASE web
+COPY ./database/dump /docker-entrypoint-initdb.d/
+
+
+
+
+
+
+
+
+
+
+

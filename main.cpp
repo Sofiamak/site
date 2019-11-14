@@ -4,24 +4,24 @@
 #include "router.h"
 #include <bits/stdc++.h> 
 #include "database/api/driver.cpp"
-// #include "lib/header/mysql.h"
+#include "lib/header/mysql.h"
 
 using namespace server;
 using namespace router;
 using namespace driver;
-// using namespace mysql;
+using namespace mysql;
 
 int main(void) {
       
       ServerWorker svr;
       Router  router;
 
-      // MySql ms;
-      // ms.HOST="127.0.0.1";
-      // ms.USER="root";
-      // ms.PASSWD="pass";
-      // ms.PORT=3326;
-      //DBDriver::init(ms).getConnect();
+      MySql ms;
+      ms.HOST="127.0.0.1";
+      ms.USER="root";
+      ms.PASSWD="pass";
+      ms.PORT=3326;
+      DBDriver::init(ms).getConnect();
       // DBDriver::init(ms).test();
       // DBDriver::init(ms).close();
       

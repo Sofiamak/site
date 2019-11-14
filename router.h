@@ -24,10 +24,8 @@ namespace router
    
    public:
       void Run(ServerWorker &sw){
-   
          sw.ser.Get("/posts",post.handleList);
          sw.ser.Get("/page", page.handleList);
-
       }
    };
 };
