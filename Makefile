@@ -64,3 +64,8 @@ mysql_client_stop:
 #show tables;
 mysql_exec:
 	docker exec -it mysql_client bash
+
+
+test: main.cpp
+	g++ -c main.cpp -o bin/main.o
+	g++ -o main bin/main.o  -I.. -lpthread 
