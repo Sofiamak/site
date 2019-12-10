@@ -59,7 +59,7 @@ mysql_client: mysql_client_build
 mysql_client_stop:
 	docker stop mysql_client || echo
 
-#mysql -uroot -p
+#mysql -uroot -ppass
 #show databases;
 #show tables;
 mysql_exec:
